@@ -35,10 +35,12 @@ def check_matr(r):
 
 
 def syndrom(r):
-    return check_matr(r).transpose()
+    return check_matr(r)
 
 
 if __name__ == '__main__':
     r = 4
     my = gen_matr(r)
     my = check_matr(r)
+    ny=syndrom(r)
+    print(ny)
