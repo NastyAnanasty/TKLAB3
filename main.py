@@ -90,7 +90,7 @@ def check_matr3_3(r):
     zer = np.zeros([1, r])
     check3_3 = np.vstack((check3_3, zer))
     check3_3 = np.hstack((check3_3, on))
-    print(check3_3)
+    #print(check3_3)
     return check3_3
 
 
@@ -106,8 +106,8 @@ def gen_matr3_3(r):
     for i in range(0, pow(2, r) - r - 1):
         if (sum_rows[i]) % 2 == 1:
             gen_m3_3[i, pow(2, r) - 1] = 1
-    print(gen_m3_3)
-    return gen3_3
+    #print(gen_m3_3)
+    return gen_m3_3
 
 
 if __name__ == '__main__':
@@ -121,8 +121,8 @@ if __name__ == '__main__':
     # che = check_matr3_3(3)
     # gen = gen_matr3_3(3)
 
-    #3.2
-    for r in range(2, 4):
+    # 3.2
+    for r in range(2, 5):
         # initial data
         n = 2 ** r - 1
         k = 2 ** r - r - 1
@@ -130,19 +130,20 @@ if __name__ == '__main__':
         h_matrix = check_matr(r)
         syndrom = get_syndrom(r)
 
-        for error_num in range(1, 3):
+        for error_num in range(1, 4):
             study(error_num, n, k, g_matrix, h_matrix, syndrom)
 
-    #3.4
-    for r in range(2, 4):
+    # 3.4
+    for r in range(2, 5):
         # initial data
         n = 2 ** r
         k = 2 ** r - r - 1
         g_matrix3_3 = gen_matr3_3(r)
         h_matrix3_3 = check_matr3_3(r)
-        syndrom3_3 = syndrom3_3(r)
+        syndrom_3_3 = syndrom3_3(r)
 
         # this is a print for 3.4 task
-        for err_num in range(2, 4):
-            study(err_num, n, k, g_matrix3_3, h_matrix3_3, syndrom3_3)
+        for err_num in range(2, 5):
+            study(err_num, n, k, g_matrix3_3, h_matrix3_3, syndrom_3_3)
+
 
