@@ -28,14 +28,14 @@ def all_word(r):
 def gen_matr(r):
     gen_matr = np.eye(all_word(r).shape[0])
     gen_matr = np.hstack((gen_matr, all_word(r)))
-    print(gen_matr)
+    #print(gen_matr)
     return gen_matr
 
 
 def check_matr(r):
     check_matr = np.eye(r)
     check_matr = np.vstack((all_word(r), check_matr))
-    print(check_matr)
+    #print(check_matr)
     return check_matr
 
 
