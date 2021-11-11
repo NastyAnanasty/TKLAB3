@@ -28,14 +28,14 @@ def all_word(r):
 def gen_matr(r):
     gen_matr = np.eye(all_word(r).shape[0])
     gen_matr = np.hstack((gen_matr, all_word(r)))
-    #print(gen_matr)
+    # print(gen_matr)
     return gen_matr
 
 
 def check_matr(r):
     check_matr = np.eye(r)
     check_matr = np.vstack((all_word(r), check_matr))
-    #print(check_matr)
+    # print(check_matr)
     return check_matr
 
 
@@ -53,14 +53,8 @@ def get_syndrom(r):
 
 # ----------------------------------
 
-# --------------3.2-----------------
-def task3_2(r, error_num):
-    n = 2 ** r - 1
-    k = 2 ** r - r - 1
-    g_matrix = gen_matr(r)
-    h_matrix = check_matr(r)
-    syndrom_matrix = get_syndrom(r)
-
+# --------------3.2, 3.4------------
+def study(error_num, n, k, g_matrix, h_matrix, syndrom_matrix):
     n_word = get_code_word(g_matrix, k)
     n_word_with_mistake = []
     if error_num == 1:
@@ -69,6 +63,8 @@ def task3_2(r, error_num):
         n_word_with_mistake = lab2.make_double_mistake_in_n_word(n_word) % 2
     if error_num == 3:
         n_word_with_mistake = lab2.make_triple_mistake_in_n_word(n_word) % 2
+    if error_num == 4:
+        n_word_with_mistake = lab2.make_quadro_mistake_in_n_word(n_word) % 2
 
     syndrom = n_word_with_mistake @ h_matrix % 2
     row_num = lab2.row_index_in_matrix(syndrom, syndrom_matrix)
@@ -109,31 +105,44 @@ def gen_matr3_3(r):
     sum_rows = np.sum(gen3_3, axis=1)
     for i in range(0, pow(2, r) - r - 1):
         if (sum_rows[i]) % 2 == 1:
-            gen_m3_3[i,pow(2, r) - 1] = 1
+            gen_m3_3[i, pow(2, r) - 1] = 1
     print(gen_m3_3)
     return gen3_3
 
 
 if __name__ == '__main__':
     # this is a print for 3.1 task
-    r = 3
     # my = gen_matr(r)
     # my = check_matr(r)
     # ny = get_syndrom(r)
     # print(ny)
 
-    # task3_2(2, 1)
-    # task3_2(2, 2)
-    # task3_2(2, 3)
-    #
-    # task3_2(3, 1)
-    # task3_2(3, 2)
-    # task3_2(3, 3)
-
-    # task3_2(4, 1)
-    #  task3_2(4, 2)
-    #   task3_2(4, 3)
-
     # this is a print for 3.3 task
-    che = check_matr3_3(3)
-    gen = gen_matr3_3(3)
+    # che = check_matr3_3(3)
+    # gen = gen_matr3_3(3)
+
+    #3.2
+    for r in range(2, 4):
+        # initial data
+        n = 2 ** r - 1
+        k = 2 ** r - r - 1
+        g_matrix = gen_matr(r)
+        h_matrix = check_matr(r)
+        syndrom = get_syndrom(r)
+
+        for error_num in range(1, 3):
+            study(error_num, n, k, g_matrix, h_matrix, syndrom)
+
+    #3.4
+    for r in range(2, 4):
+        # initial data
+        n = 2 ** r
+        k = 2 ** r - r - 1
+        g_matrix3_3 = gen_matr3_3(r)
+        h_matrix3_3 = check_matr3_3(r)
+        syndrom3_3 = syndrom3_3(r)
+
+        # this is a print for 3.4 task
+        for err_num in range(2, 4):
+            study(err_num, n, k, g_matrix3_3, h_matrix3_3, syndrom3_3)
+

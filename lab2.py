@@ -181,7 +181,7 @@ def syndromes_table2(matrix, n):
 
 # 2.9
 def code_word_from_k_to_n(g_matrix, k_word):
-    #g_matrix = gen_matrix(n, k, d)
+    # g_matrix = gen_matrix(n, k, d)
     n_word = np.dot(k_word, g_matrix)
     return n_word
 
@@ -211,6 +211,7 @@ def row_index_in_matrix(row, matrix):
             index = i
             break
     return index
+
 
 def round_num(num):
     new_num = num - math.floor(num)
@@ -302,6 +303,35 @@ def make_random_n_word_for_triple_mistake(n):
     random_arr[first_place_for_one] = 1
     random_arr[second_place_for_one] = 1
     random_arr[third_place_for_one] = 1
+
+    return random_arr
+
+
+def make_quadro_mistake_in_n_word(n_word):
+    n = len(n_word)
+    random_n_word_for_double_mistake = make_random_n_word_for_quadro_mistake(n)
+    return n_word + random_n_word_for_double_mistake
+
+def make_random_n_word_for_quadro_mistake(n):
+    random_arr = []
+
+    for i in range(n):
+        random_arr.append(0)
+
+    first_place_for_one = round_num(random.uniform(0, n - 1))
+    second_place_for_one = round_num(random.uniform(0, n - 1))
+    third_place_for_one = round_num(random.uniform(0, n - 1))
+    fourth_place_for_one = round_num(random.uniform(0, n - 1))
+    while second_place_for_one == first_place_for_one:
+        second_place_for_one = round_num(random.uniform(0, n - 1))
+    while third_place_for_one == first_place_for_one or third_place_for_one == second_place_for_one:
+        third_place_for_one = round_num(random.uniform(0, n - 1))
+    while fourth_place_for_one in {first_place_for_one, second_place_for_one, third_place_for_one}:
+        fourth_place_for_one = round_num(random.uniform(0, n - 1))
+    random_arr[first_place_for_one] = 1
+    random_arr[second_place_for_one] = 1
+    random_arr[third_place_for_one] = 1
+    random_arr[fourth_place_for_one] = 1
 
     return random_arr
 
