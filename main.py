@@ -5,6 +5,7 @@ import numpy as np
 import lab2
 
 
+# --------------3.1----------------
 def all_word(r):
     result = np.zeros([2 ** r - 1, r])
     bin_arr = range(0, int(2 ** r))
@@ -27,14 +28,14 @@ def all_word(r):
 def gen_matr(r):
     gen_matr = np.eye(all_word(r).shape[0])
     gen_matr = np.hstack((gen_matr, all_word(r)))
-    #print(gen_matr)
+    print(gen_matr)
     return gen_matr
 
 
 def check_matr(r):
     check_matr = np.eye(r)
     check_matr = np.vstack((all_word(r), check_matr))
-    #print(check_matr)
+    print(check_matr)
     return check_matr
 
 
@@ -50,6 +51,9 @@ def get_syndrom(r):
     return check_matr(r)
 
 
+# ----------------------------------
+
+# --------------3.2-----------------
 def task3_2(r, error_num):
     n = 2 ** r - 1
     k = 2 ** r - r - 1
@@ -81,27 +85,55 @@ def task3_2(r, error_num):
             print("Ошибка не исправлена")
 
 
+# ----------------------------------
+
+# --------------3.3-----------------
+def check_matr3_3(r):
+    check3_3 = check_matr(r)
+    on = np.ones([pow(2, r), 1])
+    zer = np.zeros([1, r])
+    check3_3 = np.vstack((check3_3, zer))
+    check3_3 = np.hstack((check3_3, on))
+    print(check3_3)
+    return check3_3
+
+
+def syndrom3_3(r):
+    return check_matr3_3(r)
+
+
+def gen_matr3_3(r):
+    gen3_3 = gen_matr(r)
+    col = np.zeros([pow(2, r) - r - 1, 1])
+    gen_m3_3 = np.hstack((gen3_3, col))
+    sum_rows = np.sum(gen3_3, axis=1)
+    for i in range(0, pow(2, r) - r - 1):
+        if (sum_rows[i]) % 2 == 1:
+            gen_m3_3[i,pow(2, r) - 1] = 1
+    print(gen_m3_3)
+    return gen3_3
+
+
 if __name__ == '__main__':
-    #this is a print for 3.1 task
-    # r = 4
+    # this is a print for 3.1 task
+    r = 3
     # my = gen_matr(r)
     # my = check_matr(r)
     # ny = get_syndrom(r)
     # print(ny)
 
-    task3_2(2, 1)
-    task3_2(2, 2)
-    task3_2(2, 3)
+    # task3_2(2, 1)
+    # task3_2(2, 2)
+    # task3_2(2, 3)
+    #
+    # task3_2(3, 1)
+    # task3_2(3, 2)
+    # task3_2(3, 3)
 
-    task3_2(3, 1)
-    task3_2(3, 2)
-    task3_2(3, 3)
+    # task3_2(4, 1)
+    #  task3_2(4, 2)
+    #   task3_2(4, 3)
 
-    task3_2(4, 1)
-    task3_2(4, 2)
-    task3_2(4, 3)
-
-
-
-
-
+    # this is a print for 3.3 task
+    che = check_matr3_3(3)
+    gen = gen_matr3_3(3)
