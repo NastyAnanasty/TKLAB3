@@ -111,7 +111,7 @@ def gen_matr3_3(r):
 
 
 if __name__ == '__main__':
-    # this is a print for 3.1 task
+    # this is a print for 3.1 task :)
     # my = gen_matr(r)
     # my = check_matr(r)
     # ny = get_syndrom(r)
